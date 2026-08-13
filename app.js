@@ -1,31 +1,5 @@
 "use strict";
 
-/*
- * =========================================================
- * MEDICAL REPORT OCR FRONTEND
- * =========================================================
- *
- * Backend:
- * https://medicalocr.onrender.com
- *
- * Endpoint:
- * POST /extract
- *
- * Expected request:
- * multipart/form-data
- * field = file
- *
- * Expected response:
- * FHIR R4 Bundle
- * containing Observation resources.
- *
- * =========================================================
- */
-
-
-// =========================================================
-// CONFIGURATION
-// =========================================================
 
 const CONFIG = {
 
@@ -43,10 +17,6 @@ const CONFIG = {
 
 };
 
-
-// =========================================================
-// DOM ELEMENTS
-// =========================================================
 
 const fileInput =
     document.getElementById("fileInput");
@@ -131,18 +101,10 @@ const jsonContainer =
     );
 
 
-// =========================================================
-// STATE
-// =========================================================
-
 let selectedPdf = null;
 
 let latestFhirResponse = null;
 
-
-// =========================================================
-// INITIALIZATION
-// =========================================================
 
 document.addEventListener(
     "DOMContentLoaded",
@@ -208,10 +170,6 @@ function initialize() {
 }
 
 
-// =========================================================
-// FILE SELECTION
-// =========================================================
-
 function handleFileSelection(event) {
 
     const files = event.target.files;
@@ -228,9 +186,6 @@ function handleFileSelection(event) {
 }
 
 
-// =========================================================
-// DRAG OVER
-// =========================================================
 
 function handleDragOver(event) {
 
@@ -243,9 +198,6 @@ function handleDragOver(event) {
 }
 
 
-// =========================================================
-// DRAG LEAVE
-// =========================================================
 
 function handleDragLeave(event) {
 
@@ -257,10 +209,6 @@ function handleDragLeave(event) {
 
 }
 
-
-// =========================================================
-// DROP
-// =========================================================
 
 function handleDrop(event) {
 
@@ -287,9 +235,6 @@ function handleDrop(event) {
 }
 
 
-// =========================================================
-// PROCESS FILE
-// =========================================================
 
 function processSelectedFile(file) {
 
@@ -343,9 +288,6 @@ function processSelectedFile(file) {
 }
 
 
-// =========================================================
-// PDF VALIDATION
-// =========================================================
 
 function isPdf(file) {
 
@@ -361,9 +303,6 @@ function isPdf(file) {
 }
 
 
-// =========================================================
-// DISPLAY FILE
-// =========================================================
 
 function displaySelectedFile(file) {
 
@@ -381,9 +320,6 @@ function displaySelectedFile(file) {
 }
 
 
-// =========================================================
-// FORMAT FILE SIZE
-// =========================================================
 
 function formatFileSize(bytes) {
 
@@ -411,9 +347,6 @@ function formatFileSize(bytes) {
 }
 
 
-// =========================================================
-// CLEAR FILE
-// =========================================================
 
 function clearSelectedFile() {
 
@@ -440,9 +373,6 @@ function clearSelectedFile() {
 }
 
 
-// =========================================================
-// EXTRACTION
-// =========================================================
 
 async function handleExtraction() {
 
@@ -476,20 +406,6 @@ async function handleExtraction() {
             "file",
             selectedPdf
         );
-
-
-        /*
-         * IMPORTANT
-         *
-         * Do NOT manually set
-         *
-         * Content-Type: multipart/form-data
-         *
-         * when using FormData.
-         *
-         * The browser automatically adds
-         * the required boundary.
-         */
 
 
         const response =
@@ -589,31 +505,17 @@ async function handleExtraction() {
 }
 
 
-// =========================================================
-// HEADERS
-// =========================================================
+
 
 function buildHeaders() {
 
-    /*
-     * Your backend currently allows /extract
-     * without authentication.
-     *
-     * Therefore we intentionally do not
-     * send Authorization here.
-     *
-     * If your backend later requires a token,
-     * add it here.
-     */
 
     return {};
 
 }
 
 
-// =========================================================
-// FETCH WITH TIMEOUT
-// =========================================================
+
 
 async function fetchWithTimeout(
     url,
@@ -654,9 +556,6 @@ async function fetchWithTimeout(
 }
 
 
-// =========================================================
-// API ERROR
-// =========================================================
 
 function getApiErrorMessage(
     status,
@@ -716,9 +615,6 @@ function getApiErrorMessage(
 }
 
 
-// =========================================================
-// FRIENDLY ERROR
-// =========================================================
 
 function getFriendlyErrorMessage(
     error
@@ -757,9 +653,6 @@ function getFriendlyErrorMessage(
 }
 
 
-// =========================================================
-// LOADING STATE
-// =========================================================
 
 function setLoading(isLoading) {
 
@@ -799,9 +692,6 @@ function setLoading(isLoading) {
 }
 
 
-// =========================================================
-// RENDER RESULTS
-// =========================================================
 
 function renderResults(
     fhirBundle
@@ -850,10 +740,6 @@ function renderResults(
 }
 
 
-// =========================================================
-// EXTRACT OBSERVATIONS
-// =========================================================
-
 function extractObservations(
     bundle
 ) {
@@ -901,9 +787,6 @@ function extractObservations(
 }
 
 
-// =========================================================
-// NORMALIZE OBSERVATION
-// =========================================================
 
 function normalizeObservation(
     observation
@@ -983,9 +866,6 @@ function normalizeObservation(
 }
 
 
-// =========================================================
-// SUMMARY
-// =========================================================
 
 function renderSummary(
     observations
@@ -1022,9 +902,7 @@ function renderSummary(
 }
 
 
-// =========================================================
-// GET STATUS
-// =========================================================
+
 
 function getStatus(
     observation
@@ -1074,9 +952,7 @@ function getStatus(
 }
 
 
-// =========================================================
-// RENDER OBSERVATION CARDS
-// =========================================================
+
 
 function renderObservationCards(
     observations
@@ -1105,9 +981,6 @@ function renderObservationCards(
 }
 
 
-// =========================================================
-// CREATE OBSERVATION CARD
-// =========================================================
 
 function createObservationCard(
     observation
@@ -1253,9 +1126,6 @@ function createObservationCard(
 }
 
 
-// =========================================================
-// STATUS LABEL
-// =========================================================
 
 function getStatusLabel(
     status
@@ -1280,9 +1150,6 @@ function getStatusLabel(
 }
 
 
-// =========================================================
-// FORMAT VALUE
-// =========================================================
 
 function formatValue(
     value
@@ -1305,9 +1172,6 @@ function formatValue(
 }
 
 
-// =========================================================
-// REFERENCE RANGE
-// =========================================================
 
 function formatReferenceRange(
     observation
@@ -1352,9 +1216,6 @@ function formatReferenceRange(
 }
 
 
-// =========================================================
-// MARKER POSITION
-// =========================================================
 
 function calculateMarkerPosition(
     observation
@@ -1390,11 +1251,7 @@ function calculateMarkerPosition(
     }
 
 
-    /*
-     * Create some space around the
-     * normal range so high/low values
-     * remain visually visible.
-     */
+   
 
     const range =
         high - low;
@@ -1430,9 +1287,7 @@ function calculateMarkerPosition(
 }
 
 
-// =========================================================
-// RENDER JSON
-// =========================================================
+
 
 function renderJson(
     data
@@ -1483,9 +1338,6 @@ function toggleJson() {
 }
 
 
-// =========================================================
-// COPY JSON
-// =========================================================
 
 async function copyJson() {
 
@@ -1542,9 +1394,7 @@ async function copyJson() {
 }
 
 
-// =========================================================
-// DOWNLOAD JSON
-// =========================================================
+
 
 function downloadJson() {
 
@@ -1651,10 +1501,6 @@ function clearError() {
 
 }
 
-
-// =========================================================
-// ESCAPE HTML
-// =========================================================
 
 function escapeHtml(
     value
