@@ -10,10 +10,10 @@ const CONFIG = {
         "/extract",
 
     MAX_FILE_SIZE:
-        10 * 1024 * 1024,
+        20 * 1024 * 1024,
 
     REQUEST_TIMEOUT:
-        120000
+        600000
 
 };
 
@@ -258,7 +258,7 @@ function processSelectedFile(file) {
     ) {
 
         showError(
-            "File size must be less than 10 MB."
+            "File size must be less than 20 MB."
         );
 
         return;
